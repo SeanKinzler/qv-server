@@ -1,15 +1,17 @@
-var bodyParser = require('body-parser');
-var fs = require('fs');
-var path = require('path');
-var serverConfig = {
+const fs = require('fs');
+const path = require('path');
+let serverConfig = {
   key: fs.readFileSync(path.join(__dirname, './config/credentials/key.pem')),
   cert: fs.readFileSync(path.join(__dirname, './config/credentials/cert.pem')),
   // ca: fs.readFileSync(path.join(__dirname, './credentials/chain.pem'))
 };
-
-var server = require('https').createServer(serverConfig, require('./config/routes.js'));
+let app = require('./config/routes.js');
+let server = require('https').createServer(serverConfig, app);
 
 const port = process.env.PORT || 8080;
-server.listen(port);
+
+app.listen(port, () => {
+  console.log('listening on ' + port);
+});
 
 
