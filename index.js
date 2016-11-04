@@ -7,9 +7,7 @@ var serverConfig = {
   // ca: fs.readFileSync(path.join(__dirname, './credentials/chain.pem'))
 };
 
-var server = require('https').createServer(serverConfig, require());
-app.use(bodyParser());
-
+var server = require('https').createServer(serverConfig, require('./config/routes.js'));
 
 const port = process.env.PORT || 8080;
 server.listen(port);
